@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>彩玉｜スポット</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./img/fav.ico">
+    <style>
+        /* カテゴリーボタン */
+#category ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+
+    padding: 0;
+    margin: 30px auto;
+
+    list-style: none;
+}
+
+/* ボタン */
+#category li {
+    width: 105px;
+    height: 105px;
+
+    background: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+    transition: all 0.3s ease;
+}
+
+/* アイコン */
+#category li img {
+    width: 48px;
+    height: 48px;
+
+    object-fit: contain;
+
+    transition: transform 0.3s ease;
+}
+
+/* 文字 */
+#category .spottext {
+    margin: 6px 0 0;
+
+    font-size: 13px;
+    font-weight: bold;
+
+    color: #587060;
+}
+
+/* ホバー */
+#category li:hover {
+    transform: translateY(-5px);
+
+    /* border-color: #DE9F9F; */
+
+    box-shadow: 0 8px 18px rgba(222, 159, 159, 0.18);
+}
+
+#category li:hover img {
+    transform: scale(1.08);
+}
+
+/* クリック時 */
+#category li:active {
+    transform: scale(0.96);
+}
+
+/* 選択中 */
+#category li.selected {
+    border: 2px solid #DE9F9F;
+
+    background: #fff8f8;
+
+    box-shadow: 0 6px 18px rgba(222, 159, 159, 0.2);
+}
+
+#category li.selected .spottext {
+    color: #DE9F9F;
+}
+
+
+/* =====================================
+   彩玉｜きらきら可愛い背景
+===================================== */
+
+body {
+    position: relative;
+    background: #ffffff;
+    overflow-x: hidden;
+}
+
+
+/* 背景専用レイヤー */
+.cute-bg {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    pointer-events: none;
+    z-index: -1;
+}
+
+
+/* =====================================
+   ふわっとした光
+===================================== */
+
+.glow {
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(45px);
+
+    opacity: 0.45;
+}
+
+
+/* ピンク */
+.glow-pink {
+    width: 300px;
+    height: 300px;
+
+    left: -100px;
+    top: 100px;
+
+    background: rgba(255, 190, 210, 0.35);
+
+    animation: glowPink 10s ease-in-out infinite;
+}
+
+
+/* グリーン */
+.glow-green {
+    width: 280px;
+    height: 280px;
+
+    right: -100px;
+    top: 350px;
+
+    background: rgba(190, 220, 200, 0.35);
+
+    animation: glowGreen 12s ease-in-out infinite;
+}
+
+
+/* 下のピンク */
+.glow-pink2 {
+    width: 250px;
+    height: 250px;
+
+    left: 40%;
+    bottom: -120px;
+
+    background: rgba(255, 205, 220, 0.28);
+
+    animation: glowPink2 14s ease-in-out infinite;
+}
+
+
+/* =====================================
+   キラキラ
+===================================== */
+
+.star {
+    position: absolute;
+
+    display: block;
+
+    font-family: serif;
+
+    color: rgba(222, 159, 159, 0.65);
+
+    text-shadow:
+        0 0 5px rgba(255, 255, 255, 1),
+        0 0 10px rgba(222, 159, 159, 0.4),
+        0 0 20px rgba(222, 159, 159, 0.2);
+
+    animation: twinkle 4s ease-in-out infinite;
+}
+
+
+/* =====================================
+   星の位置
+===================================== */
+
+.star1 {
+    left: 7%;
+    top: 18%;
+    font-size: 30px;
+}
+
+.star2 {
+    left: 17%;
+    top: 40%;
+    font-size: 18px;
+    animation-delay: 1s;
+}
+
+.star3 {
+    left: 27%;
+    top: 75%;
+    font-size: 25px;
+    animation-delay: 2.5s;
+}
+
+.star4 {
+    left: 38%;
+    top: 22%;
+    font-size: 16px;
+    animation-delay: 0.5s;
+}
+
+.star5 {
+    left: 48%;
+    top: 60%;
+    font-size: 22px;
+    animation-delay: 3s;
+}
+
+.star6 {
+    left: 60%;
+    top: 15%;
+    font-size: 30px;
+    animation-delay: 1.5s;
+}
+
+.star7 {
+    left: 68%;
+    top: 75%;
+    font-size: 17px;
+    animation-delay: 4s;
+}
+
+.star8 {
+    left: 76%;
+    top: 35%;
+    font-size: 25px;
+    color: rgba(120, 155, 135, 0.6);
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 12px rgba(120, 155, 135, 0.4);
+
+    animation-delay: 2s;
+}
+
+.star9 {
+    left: 87%;
+    top: 18%;
+    font-size: 19px;
+    animation-delay: 3.5s;
+}
+
+.star10 {
+    left: 92%;
+    top: 60%;
+    font-size: 28px;
+
+    color: rgba(120, 155, 135, 0.55);
+
+    text-shadow:
+        0 0 5px #fff,
+        0 0 12px rgba(120, 155, 135, 0.4);
+
+    animation-delay: 1s;
+}
+
+.star11 {
+    left: 32%;
+    top: 50%;
+    font-size: 15px;
+    animation-delay: 4.5s;
+}
+
+.star12 {
+    left: 82%;
+    top: 85%;
+    font-size: 20px;
+    animation-delay: 2.8s;
+}
+
+
+/* =====================================
+   小さな光の粒
+===================================== */
+
+.dot {
+    position: absolute;
+
+    display: block;
+
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 0 5px rgba(255, 255, 255, 1),
+        0 0 12px rgba(222, 159, 159, 0.55);
+
+    animation: dotFloat 6s ease-in-out infinite;
+}
+
+
+/* 粒の位置 */
+
+.dot1 {
+    left: 12%;
+    top: 30%;
+}
+
+.dot2 {
+    left: 23%;
+    top: 15%;
+    animation-delay: 2s;
+}
+
+.dot3 {
+    left: 42%;
+    top: 35%;
+    animation-delay: 4s;
+}
+
+.dot4 {
+    left: 55%;
+    top: 80%;
+    animation-delay: 1s;
+}
+
+.dot5 {
+    left: 64%;
+    top: 45%;
+    animation-delay: 3s;
+}
+
+.dot6 {
+    left: 73%;
+    top: 20%;
+    animation-delay: 5s;
+}
+
+.dot7 {
+    left: 84%;
+    top: 50%;
+    animation-delay: 1.5s;
+}
+
+.dot8 {
+    left: 93%;
+    top: 80%;
+    animation-delay: 3.5s;
+}
+
+
+/* =====================================
+   キラキラのアニメーション
+===================================== */
+
+@keyframes twinkle {
+
+    0% {
+        opacity: 0.15;
+
+        transform:
+            translateY(15px)
+            scale(0.55)
+            rotate(0deg);
+    }
+
+    25% {
+        opacity: 0.45;
+    }
+
+    50% {
+        opacity: 1;
+
+        transform:
+            translateY(-15px)
+            scale(1.25)
+            rotate(20deg);
+    }
+
+    75% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 0.15;
+
+        transform:
+            translateY(10px)
+            scale(0.55)
+            rotate(40deg);
+    }
+}
+
+
+/* =====================================
+   粒がふわふわ
+===================================== */
+
+@keyframes dotFloat {
+
+    0%,
+    100% {
+        opacity: 0.15;
+
+        transform:
+            translate(0, 15px)
+            scale(0.6);
+    }
+
+    50% {
+        opacity: 0.9;
+
+        transform:
+            translate(15px, -20px)
+            scale(1.3);
+    }
+}
+
+
+/* =====================================
+   光の動き
+===================================== */
+
+@keyframes glowPink {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(180px, 100px)
+            scale(1.25);
+    }
+}
+
+
+@keyframes glowGreen {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-160px, -80px)
+            scale(1.2);
+    }
+}
+
+
+@keyframes glowPink2 {
+
+    0%,
+    100% {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-100px, -80px)
+            scale(1.2);
+    }
+}
+
+footer{
+    background-color: #fff;
+}
+    </style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- きらきら背景 -->
+<div class="cute-bg">
+
+    <!-- 大きな光 -->
+    <div class="glow glow-pink"></div>
+    <div class="glow glow-green"></div>
+    <div class="glow glow-pink2"></div>
+
+    <!-- キラキラ -->
+    <span class="star star1"><img src="img/haikei_frower.png" style="width: 30px;"></span>
+    
+    <span class="star star3"><img src="img/haikei_frower.png" style="width: 30px;"></span>
+    <span class="star star4">＊</span>
+    <span class="star star5"><img src="img/haikei_frower.png" style="width: 30px;"></span>
+    
+    <span class="star star7"><img src="img/haikei_frower.png" style="width: 30px;"></span>
+    <span class="star star8">＊</span>
+    <span class="star star9"><img src="img/haikei_frower.png" style="width: 30px;"></span>
+    
+    <span class="star star11">＊</span>
+    <span class="star star12">＊</span>
+
+    <!-- 小さな光の粒 -->
+    <i class="dot dot1"></i>
+    <i class="dot dot2"></i>
+    <i class="dot dot3"></i>
+    <i class="dot dot4"></i>
+    <i class="dot dot5"></i>
+    <i class="dot dot6"></i>
+    <i class="dot dot7"></i>
+    <i class="dot dot8"></i>
+
+</div>
+    <a href="#" id="top-button">
+        <img src="img/Group 44.png" alt="TOPに戻る">
+    </a>
+    <header>
+        <a href="index.html"><img src="img/94432932-196e-4b25-ac85-ca7c07039156.png"></a>
+
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <nav id="nav">
+            <ul>
+                <li><a href="index.html">ホーム</a></li>
+                <li><a href="spot.html" class="active">スポット</a></li>
+                <li><a href="about.html">このサイトについて</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div id="head">
+        <p id="supotto">スポット</p>
+        <h2 id="spot_h2">行きたい場所が見つかる<img src="img/Group green.png" id="green5"></h2>
+        <div id="supotto_2">みんなのおすすめスポットをシェアしよう</div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+
+    <div id="category">
+        <ul>
+            <li data-category="食べ物"><img src="img/Group 38.png">
+                <p id="spottext">食べ物</p>
+            </li>
+            <li data-category="歴史"><img src="img/Group 39.png">
+                <p id="spottext">歴史</p>
+            </li>
+            <li data-category="観光"><img src="img/Group 40.png">
+                <p id="spottext">観光</p>
+            </li>
+            <li data-category="イベント"><img src="img/Group 41.png">
+                <p id="spottext">イベント</p>
+            </li>
+        </ul>
+    </div>
+    <div id="spot-list">
+        <ul class="item_ul" id="item_ul">
+
+        </ul>
+    </div>
+    <div id="item_overlay">
+        <div id="modal">
+            <img id="modal-img">
+            <h2 id="modal-name"></h2>
+            <p id="modal-text"></p>
+
+            <ul>
+                <li>
+                    <p class="access"><b>アクセス</b></p>
+                    <p id="modal-post"></p>
+                    <p id="modal-address"></p>
+                    <p id="modal-tell"></p>
+                </li>
+                <li>
+                    <p id="modal-map"></p>
+                    <p id="homepage"></p>
+                </li>
+            </ul>
+
+            <p class="closecenter"><button id="close">×</button></p>
+
+        </div>
+    </div>
+
+    <footer>
+         <hr>
+        <div id="footer_1">
+            <div id="spot_haikei">
+            <p><img src="img/94432932-196e-4b25-ac85-ca7c07039156.png" id="footer"></p>
+            <ul id="footer_ul">
+                <li><a href="https://www.tiktok.com/ja-JP/"><img src="img/icons8-チクタク-48.png"
+                            id="footer_logo"></a><br>tiktok</li>
+                <li><a href="https://x.com"><img src="img/x_logo.png" id="footer_logo"></a><br>x</li>
+                <li><a href="https://www.instagram.com/?hl=ja"><img src="img/instagram.png"
+                            id="footer_logo"></a><br>instagram</li>
+            </ul>
+            </div>
+            <div class="footer_content">
+
+                <div class="footer_post">
+                    <h2 id="footer_h2">みんなの投稿を参考にするよ！</h2>
+                    <span>＃彩玉</span>をつけて投稿しよう！
+                </div>
+
+                <div id="footer2">
+                    )<a href="index.html">ホーム</a><br>
+                    )<a href="spot.html">スポット</a><br>
+                    )<a href="about.html">このサイトについて</a><br>
+                    )<a href="contact.html">お問い合わせ</a>
+                </div>
+
+            </div>
+            <p id="footer_mail">
+                saitama.utunomiyabusinessdenshicollege@irodorinosaitama
+            </p>
+    </footer>
+
+
+    <script src="spots.js"></script>
+    <script src="javascript.js"></script>
+</body>
+
+</html>
